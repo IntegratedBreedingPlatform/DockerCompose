@@ -1,8 +1,7 @@
 ## Pre-requisites
 * docker and docker-compose is installed
 * IPV4 forwarding is enabled - net.ipv4.ip_forward=1
-
-
+* a [dockerhub](https://hub.docker.com/) account with access to the bmsapp repo. For external dev teams access requests can be performed via our [HelpDesk](https://ibplatform.atlassian.net/servicedesk/customer/portal/4/group/30/create/60)
 ## Running the containers
 
 ### Clone DockerCompose
