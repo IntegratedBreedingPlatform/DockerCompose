@@ -27,4 +27,6 @@ Creating bmsdocker_bmsapp_1   ... done
 ### Check in web browser after 3-5 mins if the application launched
 http://localhost/ibpworkbench/main
 
+Log in with admin - @dm1N and change your user information.
+
 That's it!
