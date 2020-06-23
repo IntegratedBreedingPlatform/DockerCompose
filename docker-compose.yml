@@ -9,6 +9,8 @@ services:
     ports:
       - "80:8080"
     restart: always
+    environment:
+      - BMS_CROPS=${BMS_CROPS:?err}
     volumes:
       - mysqldata:/var/lib/mysql
     links:
