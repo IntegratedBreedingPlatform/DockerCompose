@@ -53,7 +53,7 @@ services:
       - VIRTUAL_PORT=8080
       - LETSENCRYPT_HOST=${BMS_SSL_HOST:-bmsdock.leafnode.io}
       - LETSENCRYPT_EMAIL=${BMS_SSL_EMAIL:-greg@leafnode.io}
-      - BMS_SCHEME=https
+      - BMS_SCHEME=${BMS_SCHEME:-http}
     volumes:
       - mysqldata:/var/lib/mysql
     links:
