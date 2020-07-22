@@ -11,6 +11,8 @@ services:
       - proxyvhost:/etc/nginx/vhost.d
       - proxyhtml:/usr/share/nginx/html
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./nginx/bms.conf:/etc/nginx/conf.d/bms.conf:ro
+      - ./nginx/default_location:/etc/nginx/vhost.d/default_location:ro
     networks:
       - bmsnet
     logging:
