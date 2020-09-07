@@ -5,11 +5,11 @@ services:
       - bmsmysql-1
     image: ${BMS_IMG_URI:?err}:${BMS_RELEASE:?err}
     ports:
-      - "8080:8080"
+      - "18080:8080"
     restart: always
     environment:
       - VIRTUAL_HOST=${BMS_SSL_HOST:-bmsdock.leafnode.io}
-      - VIRTUAL_PORT=8080
+      - VIRTUAL_PORT=18080
       - LETSENCRYPT_HOST=${BMS_SSL_HOST:-bmsdock.leafnode.io}
       - LETSENCRYPT_EMAIL=${BMS_SSL_EMAIL:-leafnodedev@leafnode.io}
       - BMS_SCHEME=${BMS_SCHEME:-https}
