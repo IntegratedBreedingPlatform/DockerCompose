@@ -1,0 +1,52 @@
+version: '3'
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - proxycerts:/etc/nginx/certs
+      - proxyvhost:/etc/nginx/vhost.d
+      - proxyhtml:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./nginx/bms.conf:/etc/nginx/conf.d/bms.conf:ro
+      - ./nginx/default_location:/etc/nginx/vhost.d/default_location:ro
+    networks:
+      - bmsnet
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "500k"
+        max-file: "50"
+
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: nginx-proxy-le
+    restart: always
+    environment:
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+      - DEFAULT_EMAIL=${BMS_SSL_EMAIL:-leafnodedev@leafnode.io}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - proxycerts:/etc/nginx/certs
+      - proxyvhost:/etc/nginx/vhost.d
+      - proxyhtml:/usr/share/nginx/html
+    networks:
+      - bmsnet
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "500k"
+        max-file: "50"
+
+
+volumes:
+  proxycerts:
+  proxyvhost:
+  proxyhtml:
+
+networks:
+  bmsnet:
+    driver: bridge
