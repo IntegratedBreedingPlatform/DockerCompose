@@ -76,7 +76,7 @@ elif [ "$PURPOSE" == "app" ]; then
     read RUN
     if [ "$RUN" == "y" ]; then
             docker-compose up -d
-            die "Done, proxy server now running"
+            die "Done, app server now running"
     else
             die "Setup done, to run the server docker-compose up -d"
     fi
