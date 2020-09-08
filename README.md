@@ -12,6 +12,7 @@
 * **docker-compose-ssl.yml** - this is a setup that uses 4 containers to serve the bmsapp via HTTPS. The TLS Certificate is created and reenwed by the letsencrypt container and the requests are handled by the nginx-proxy container.
 * **multi-docker-compose-proxy.yml** - this configuration is used when launching multiple instances of the bmsapp in a single server.
 * **multi-docker-compose-app.yml** - this configuration is used when launching multiple instances of the bmsapp in a single server.
+* **setup.sh** - a bash script for setting up a multi-container app in a single server.
 
 ## Running the containers
 
