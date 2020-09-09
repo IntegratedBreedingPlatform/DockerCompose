@@ -19,6 +19,7 @@ services:
       - BMS_DB_PASSWORD=${BMS_DB_PASS:?err}
     volumes:
       - mysqldata:/var/lib/mysql
+      - ./logs:/usr/local/tomcat/logs
       - ./config:/bms/BMSConfig/bmsdocker
     logging:
       driver: "json-file"
