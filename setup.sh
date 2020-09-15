@@ -44,7 +44,7 @@ elif [ "$PURPOSE" == "app" ]; then
     echo "BMS Admin Email - $ADMIN_EMAIL"
 
     BMS_MYSQL=$(echo "$BMS_HOSTNAME" | tr -dc '[:alnum:]\n\r')
-    count_apps=$(docker ps -q -f name=bmsapp | wc -l)
+    count_apps=$(docker ps -q -f name=bmsapp_1 | wc -l)
     BMS_PORT_PREFIX=$((count_apps + 1))
 
     echo "Confirm? (y/n)"
