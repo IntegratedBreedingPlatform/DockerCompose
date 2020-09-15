@@ -58,7 +58,7 @@ elif [ "$PURPOSE" == "app" ]; then
     cp .env.sample .env
     cp config/application.properties.orig config/application.properties
 
-    sed -i -e "s/BMS_RELEASE=15.0/BMS_RELEASE=$BMS_VERSION/g" .env
+    sed -i -e "s/BMS_RELEASE=16.0/BMS_RELEASE=$BMS_VERSION/g" .env
     sed -i -e "s/BMS_DB_HOST=bmsmysql/BMS_DB_HOST=$BMS_MYSQL/g" .env
     sed -i -e "s/BMS_DB_PASS=CHANGE_PASSWORD/BMS_DB_PASS=$BMS_PASS/g" .env
     sed -i -e "s/BMS_CROPS=maize/BMS_CROPS=$BMS_CROPS/g" .env
