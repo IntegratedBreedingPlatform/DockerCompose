@@ -3,18 +3,21 @@ services:
   bmsapp:
     depends_on:
       - bmsmysql
-    networks:
-      - bmsnet
     image: ${BMS_IMG_URI:?err}:${BMS_RELEASE:?err}
     ports:
       - "80:8080"
     restart: always
     environment:
+      - VIRTUAL_HOST=${BMS_SSL_HOST:-bmsdock.leafnode.io}
+      - VIRTUAL_PORT=8080
+      - LETSENCRYPT_HOST=${BMS_SSL_HOST:-bmsdock.leafnode.io}
+      - LETSENCRYPT_EMAIL=${BMS_SSL_EMAIL:-leafnodedev@leafnode.io}
+      - BMS_SCHEME=${BMS_SCHEME:-https}
+      - BMS_PORT=${BMS_PORT:-443}
       - BMS_CROPS=${BMS_CROPS:?err}
+      - BMS_DB_PASSWORD=${BMS_DB_PASS:?err}
     volumes:
       - mysqldata:/var/lib/mysql
-    links:
-      - bmsmysql
     logging:
       # limit logs retained on host to 25MB
       driver: "json-file"
@@ -26,8 +29,6 @@ services:
     image: mysql:5.6
     ports:
        - "3307:3306"
-    networks:
-      - bmsnet
     volumes:
          - mysqldata:/var/lib/mysql
          - ./mysql/conf:/etc/mysql/conf.d

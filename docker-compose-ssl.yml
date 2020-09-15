@@ -59,6 +59,7 @@ services:
       - BMS_SCHEME=${BMS_SCHEME:-https}
       - BMS_PORT=${BMS_PORT:-443}
       - BMS_CROPS=${BMS_CROPS:?err}
+      - BMS_DB_PASSWORD=${BMS_DB_PASS:?err}
     volumes:
       - mysqldata:/var/lib/mysql
     links:
