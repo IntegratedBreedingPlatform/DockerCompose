@@ -2,31 +2,35 @@ version: '3'
 services:
   bmsapp:
     depends_on:
-      - bmsmysql
+      - bmsmysql-1
     image: ${BMS_IMG_URI:?err}:${BMS_RELEASE:?err}
-    networks:
-      - bmsnet
     ports:
-      - "80:8080"
+      - "18080:8080"
     restart: always
     environment:
+      - VIRTUAL_HOST=${BMS_SSL_HOST:-bmsdock.leafnode.io}
+      - VIRTUAL_PORT=18080
+      - LETSENCRYPT_HOST=${BMS_SSL_HOST:-bmsdock.leafnode.io}
+      - LETSENCRYPT_EMAIL=${BMS_SSL_EMAIL:-leafnodedev@leafnode.io}
+      - BMS_SCHEME=${BMS_SCHEME:-https}
+      - BMS_PORT=${BMS_PORT:-443}
       - BMS_CROPS=${BMS_CROPS:?err}
+      - BMS_DB_HOST=${BMS_DB_HOST:?err}
       - BMS_DB_PASSWORD=${BMS_DB_PASS:?err}
     volumes:
       - mysqldata:/var/lib/mysql
+      - ./logs:/usr/local/tomcat/logs
+      - ./config:/bms/BMSConfig/bmsdocker
     logging:
-      # limit logs retained on host to 25MB
       driver: "json-file"
       options:
         max-size: "500k"
         max-file: "50"
 
-  bmsmysql:
+  bmsmysql-1:
     image: mysql:5.6
-    networks:
-      - bmsnet
     ports:
-       - "3307:3306"
+       - "13306:3306"
     volumes:
          - mysqldata:/var/lib/mysql
          - ./mysql/conf:/etc/mysql/conf.d
@@ -41,8 +45,8 @@ services:
 
 volumes:
   mysqldata:
-    external: false
 
 networks:
-  bmsnet:
-    driver: bridge
+  default:
+    external:
+      name: proxy_bmsnet
