@@ -3,14 +3,14 @@
 # Greg Hermo greg@leafnode.io
 # September 2020
 
-echo "Extracing war files..."
+echo "Extracting war files..."
 cd /usr/local/tomcat/webapps
 [ ! -d bmsapi ] && unzip bmsapi.war -d bmsapi
 [ ! -d Fieldbook ] && unzip Fieldbook.war -d Fieldbook
 [ ! -d GDMS ] && unzip GDMS.war -d GDMS
 [ ! -d ibpworkbench ] && unzip ibpworkbench.war -d ibpworkbench
 [ ! -d inventory-manager ] && unzip inventory-manager.war -d inventory-manager
-echo "DONE extracing war files..."
+echo "DONE extracting war files..."
 
 echo "Copying files..."
 while IFS="" read -r p || [ -n "$p" ]
