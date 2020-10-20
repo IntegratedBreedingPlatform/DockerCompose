@@ -62,8 +62,8 @@ services:
       - BMS_DB_PASSWORD=${BMS_DB_PASS:?err}
     volumes:
       - mysqldata:/var/lib/mysql
-    links:
-      - bmsmysql
+      - ./custom:/custom
+    entrypoint: ['/custom/copy.sh']
     logging:
       driver: "json-file"
       options:

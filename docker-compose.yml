@@ -14,6 +14,8 @@ services:
       - BMS_DB_PASSWORD=${BMS_DB_PASS:?err}
     volumes:
       - mysqldata:/var/lib/mysql
+      - ./custom:/custom
+    entrypoint: ['/custom/copy.sh']
     logging:
       # limit logs retained on host to 25MB
       driver: "json-file"

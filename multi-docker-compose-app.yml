@@ -21,6 +21,8 @@ services:
       - mysqldata:/var/lib/mysql
       - ./logs:/usr/local/tomcat/logs
       - ./config:/bms/BMSConfig/bmsdocker
+      - ./custom:/custom
+    entrypoint: ['/custom/copy.sh']
     logging:
       driver: "json-file"
       options:
