@@ -1,0 +1,2 @@
+vsni.lic:/bvdesign/bin/
+testfile:/usr/local/tomcat/webapps/Fieldbook/WEB-INF/static
