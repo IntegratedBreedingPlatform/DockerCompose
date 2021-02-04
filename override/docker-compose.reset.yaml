@@ -1,0 +1,4 @@
+version: '3'
+services:
+  bmsapp:
+    entrypoint: ['/custom/reset.sh']
