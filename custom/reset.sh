@@ -4,7 +4,8 @@
 # Feb 2021
 
 echo "=> Clean slate. Deleting all databases"
-rm -rf /var/lib/mysql/*
+rm -rf /var/lib/mysql/workbench
+rm -rf /var/lib/mysql/ib*
 echo "=> Done - deleting databases"
 
 cd /bms/DBScripts/setuputils
@@ -14,7 +15,7 @@ echo "=> Creating workbench and all crops"
 echo "=> Done - creating workbench and crops!"
 
 echo "=> Creating Programs"
-/bin/sh create_program_all.sh bmsdocker
+groovy create_crop_program.groovy bmsdocker
 echo "=> Done - creating programs!"
 
 
