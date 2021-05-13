@@ -25,5 +25,12 @@ done < /custom/files.txt
 # See example below
 # docker cp vsni.lic $1:/bvdesign/bin/vsni.lic
 
-echo "Done copying custom files..."
+echo "=> Done copying custom files."
+
+# Sleep for 10s before starting tomcat to make sure
+# mysql has completely started to avoid issue when
+# creating fresh databases - workbench, maize, etc.
+sleep 10
+
+echo "=> Starting tomcat..."
 /bin/bash /run.sh
