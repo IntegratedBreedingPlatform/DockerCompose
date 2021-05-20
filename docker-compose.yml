@@ -10,6 +10,14 @@ services:
       - "80:8080"
     restart: always
     environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID:-}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY:-}
+      - AWS_REGION=${AWS_REGION:-}
+      - AWS_BUCKET_NAME=${AWS_BUCKET_NAME:-}
+      - SFTP_HOST=${SFTP_HOST:-}
+      - SFTP_USERNAME=${SFTP_USERNAME:-}
+      - SFTP_PASSWORD=${SFTP_PASSWORD:-}
+      - SFTP_PRIVATE_KEY_PATH=${SFTP_PRIVATE_KEY_PATH:-}
       - BMS_CROPS=${BMS_CROPS:?err}
       - BMS_DB_PASSWORD=${BMS_DB_PASS:?err}
       - CATALINA_OPTS=-javaagent:/opt/spring-instrument-4.1.6.RELEASE.jar
