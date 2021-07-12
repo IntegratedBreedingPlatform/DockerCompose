@@ -11,6 +11,7 @@ services:
       - proxycerts:/etc/nginx/certs
       - proxyvhost:/etc/nginx/vhost.d
       - proxyhtml:/usr/share/nginx/html
+      - proxydhparam:/etc/nginx/dhparam
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - ./nginx/bms.conf:/etc/nginx/conf.d/bms.conf:ro
       - ./nginx/default_location:/etc/nginx/vhost.d/default_location:ro
@@ -34,6 +35,7 @@ services:
       - proxycerts:/etc/nginx/certs
       - proxyvhost:/etc/nginx/vhost.d
       - proxyhtml:/usr/share/nginx/html
+      - proxydhparam:/etc/nginx/dhparam
     networks:
       - bmsnet
     logging:
@@ -95,6 +97,7 @@ volumes:
   proxycerts:
   proxyvhost:
   proxyhtml:
+  proxydhparam:  
 
 networks:
   bmsnet:
