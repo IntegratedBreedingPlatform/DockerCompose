@@ -1,2 +1,6 @@
 vsni.lic:/bvdesign/bin/
 testfile:/usr/local/tomcat/webapps/Fieldbook/WEB-INF/static
+
+# The web.xml to be patched assumes SSL/TLS is configured (https)
+# Comment the line below if not running on https
+web.xml:/usr/local/tomcat/conf/
