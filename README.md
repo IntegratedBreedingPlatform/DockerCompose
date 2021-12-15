@@ -8,8 +8,8 @@
 * **config** - this contains the configuration files for the DBScripts inside bmsapp.
 * **mysql/conf** - this contains mysql configuration that is bind mounted to the mysql container on launch.
 * **nginx** - this contains nginx configuration that is bind mounted to the nginx-proxy container on launch.
-* **docker-compose.yml** - this default configuration is a basic setup of bmsapp with its own database that can be ported to 8080 or 80.
-* **docker-compose-ssl.yml** - this is a setup that uses 4 containers to serve the bmsapp via HTTPS. The TLS Certificate is created and renewed by the Let's Encrypt container and the requests are handled by the nginx-proxy container.
+* **docker-compose.yml** - this default configuration is a setup that uses 4 containers to serve the bmsapp via HTTPS. The TLS Certificate is created and renewed by the Let's Encrypt container and the requests are handled by the nginx-proxy container. 
+* **docker-compose-ssl.yml** - this is a basic setup of bmsapp with its own database that can be ported to 8080 or 80.
 * **multi-docker-compose-proxy.yml** - this configuration is used when launching multiple instances of the bmsapp in a single server.
 * **multi-docker-compose-app.yml** - this configuration is used when launching multiple instances of the bmsapp in a single server.
 * **setup.sh** - a bash script for setting up a multi-container app in a single server.
