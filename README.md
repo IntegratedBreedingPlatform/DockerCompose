@@ -23,7 +23,7 @@ git clone git@github.com:IntegratedBreedingPlatform/DockerCompose.git
 
 ### Copy the .env.sample to .env and change the values accordingly
 ```
-BMS_IMG_URI=ibpbmsapp/bmsapp
+BMS_IMG_URI=ibpbmsdocker/bmsapp
 BMS_RELEASE=15.0
 BMS_DB_PASS=CHANGE_PASSWORD
 ```
