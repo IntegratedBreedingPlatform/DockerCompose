@@ -1,17 +1,14 @@
 version: '3'
 services:
   nginx-proxy:
-    image: jwilder/nginx-proxy
+    image: jwilder/nginx-proxy:alpine
     container_name: nginx-proxy
     restart: always
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - proxycerts:/etc/nginx/certs
-      - proxyvhost:/etc/nginx/vhost.d
-      - proxyhtml:/usr/share/nginx/html
-      - proxydhparam:/etc/nginx/dhparam
+      - ./nginx/certs:/etc/nginx/certs
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - ./nginx/bms.conf:/etc/nginx/conf.d/bms.conf:ro
       - ./nginx/default_location:/etc/nginx/vhost.d/default_location:ro
@@ -22,42 +19,18 @@ services:
       options:
         max-size: "500k"
         max-file: "50"
-
-  letsencrypt:
-    image: jrcs/letsencrypt-nginx-proxy-companion
-    container_name: nginx-proxy-le
-    restart: always
-    environment:
-      - NGINX_PROXY_CONTAINER=nginx-proxy
-      - DEFAULT_EMAIL=${BMS_SSL_EMAIL:-leafnodedev@leafnode.io}
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - proxycerts:/etc/nginx/certs
-      - proxyvhost:/etc/nginx/vhost.d
-      - proxyhtml:/usr/share/nginx/html
-      - proxydhparam:/etc/nginx/dhparam
-    networks:
-      - bmsnet
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "500k"
-        max-file: "50"
-        
   bmsapp:
     depends_on:
       - bmsmysql
+    image: ${BMS_IMG_URI:?err}:${BMS_RELEASE:?err}
     networks:
       - bmsnet
-    image: ${BMS_IMG_URI:?err}:${BMS_RELEASE:?err}
     ports:
       - "8080:8080"
     restart: always
     environment:
       - VIRTUAL_HOST=${BMS_SSL_HOST:-bmsdock.leafnode.io}
       - VIRTUAL_PORT=8080
-      - LETSENCRYPT_HOST=${BMS_SSL_HOST:-bmsdock.leafnode.io}
-      - LETSENCRYPT_EMAIL=${BMS_SSL_EMAIL:-leafnodedev@leafnode.io}
       - BMS_SCHEME=${BMS_SCHEME:-https}
       - BMS_PORT=${BMS_PORT:-443}
       - BMS_CROPS=${BMS_CROPS:?err}
@@ -66,6 +39,8 @@ services:
       - JAVA_OPTS=-server -Xms${BMS_MEMORY:?err} -Xmx${BMS_MEMORY:?err} -XX:+CMSClassUnloadingEnabled ${LIQUIBASE_PARAM}
     volumes:
       - mysqldata:/var/lib/mysql
+      - ./logs:/usr/local/tomcat/logs
+      - ./config:/bms/BMSConfig/bmsdocker
       - ./custom:/custom
     entrypoint: ['/custom/copy.sh']
     logging:
@@ -76,10 +51,10 @@ services:
 
   bmsmysql:
     image: mysql:5.6
-    ports:
-       - "3307:3306"
     networks:
       - bmsnet
+    ports:
+       - "3307:3306"
     volumes:
          - mysqldata:/var/lib/mysql
          - ./mysql/conf:/etc/mysql/conf.d
@@ -94,10 +69,6 @@ services:
 
 volumes:
   mysqldata:
-  proxycerts:
-  proxyvhost:
-  proxyhtml:
-  proxydhparam:  
 
 networks:
   bmsnet:
