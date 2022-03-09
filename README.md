@@ -30,9 +30,20 @@ git checkout tags/[VERSION]
 ```
 BMS_IMG_URI=ibpbmsdocker/bmsapp
 BMS_RELEASE=[VERSION]
-BMS_DB_PASS=CHANGE_PASSWORD
+BMS_DB_HOST=bmsmysql
+BMS_DB_PASS=[PASSWORD]
 ```
-### Once the env variables are set, run the bmsdock containers via docker-compose
+
+### Update config/application.properties with final database connection paramters
+```
+### see BMS_DB_HOST in .env
+db.host=bmsmysql
+
+### see BMS_DB_PASS in .env
+db.password=[PASSWORD]
+```
+
+### Once the env variables and db connection parameters are set, run the bmsdock containers via docker-compose
 ```
 $ cd DockerCompose
 $ docker-compose up -d
