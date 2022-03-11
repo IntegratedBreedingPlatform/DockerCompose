@@ -25,6 +25,7 @@ services:
       - BASE_URL=${BASE_URL:-}
     volumes:
       - mysqldata:/var/lib/mysql
+      - ./config:/bms/BMSConfig/bmsdocker
       - ./custom:/custom
     entrypoint: ['/custom/copy.sh'] 
     logging:
