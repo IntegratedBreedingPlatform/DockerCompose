@@ -1,5 +1,5 @@
 ### see BMS_DB_HOST in .env
-db.host=bmsmysql-1
+db.host=${BMS_DB_HOST}
 
 ### see BMS_DB_PASS in .env
 db.password=CHANGE_PASSWORD
