@@ -65,6 +65,8 @@ services:
       - CATALINA_OPTS=-javaagent:/opt/spring-instrument-4.1.6.RELEASE.jar
       - JAVA_OPTS=-server -Xms${BMS_MEMORY:?err} -Xmx${BMS_MEMORY:?err} -XX:+CMSClassUnloadingEnabled ${LIQUIBASE_PARAM}
       - BASE_URL=${BASE_URL:-}
+      - SECURITY_2FA_ENABLED=${SECURITY_2FA_ENABLED:-true}
+      - SECURITY_2FA_ENFORCE_OTP_ON_UNKNOWN_DEVICE=${SECURITY_2FA_ENFORCE_OTP_ON_UNKNOWN_DEVICE:-false}
     volumes:
       - mysqldata:/var/lib/mysql
       - ./config:/bms/BMSConfig/bmsdocker
