@@ -4,7 +4,7 @@
 * a [dockerhub](https://hub.docker.com/) account with access to the bmsapp repo. For external dev teams access requests can be performed via our [HelpDesk](https://ibplatform.atlassian.net/servicedesk/customer/portal/4/group/30/create/60)
 
 ## Configurations
-* **.env.example** - this is where we setup environment variables utilized by the docker compose configuration. In order to use it it must be renamed to .env
+* **.env.sample** - this is where we setup environment variables utilized by the docker compose configuration. In order to use it it must be renamed to .env
 * **config** - this contains the configuration files for the DBScripts inside bmsapp.
 * **mysql/conf** - this contains mysql configuration that is bind mounted to the mysql container on launch.
 * **nginx** - this contains nginx configuration that is bind mounted to the nginx-proxy container on launch.
