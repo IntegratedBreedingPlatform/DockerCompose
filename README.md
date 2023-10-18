@@ -56,3 +56,5 @@ Creating dockercompose_bmsapp_1   ... done
 http://localhost/ibpworkbench/main
 
 That's it!
+
+### For more information, please visit the Wiki https://github.com/IntegratedBreedingPlatform/DockerCompose/wiki/BMS-on-Docker-Compose-(CentOS-Linux)
